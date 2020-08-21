@@ -1,7 +1,7 @@
 <h1 class="main-head primary-text text-center font-weight-bold text-primary">Questions</h1>
 <div id="allq">
   <% @questions.each_with_index do |ques,index| %>
-    <div class="question">
+    <div class="question" id=<%= "q-#{ques.id}" %>>
       <div class="ques">
         <p><%= "Q#{index + 1}. " + ques.question.question %></p>
         <p class="ans">
@@ -9,10 +9,8 @@
         </p>
       </div>
       <div class="score">
-        <% @questions.each_with_index do |ques,index| %>
-          <button class="score-btn" id=<%= "score-#{index+1}" %>>
-            <%= index + 1 %>
-          </button>
+        <% @questions.each_with_index do |q,index| %>
+          <%= button_to "#{index+1}", save_score_path(ques.id,score: (index+1)), method: :post,class:"score-btn s-#{ques.id}-#{index+1}", remote: true %>
         <% end %>
       </div>
     </div>
