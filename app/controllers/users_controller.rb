@@ -7,14 +7,21 @@ class UsersController < ApplicationController
   def create
     regno = params[:regno]
     name = params[:name]
-    user = User.where("regno = ?", regno).exists? ?
+    exists = User.where("regno = ?", regno).exists?
+    user = exists ?
       User.where("regno = ?", regno).first :
       User.new(name: name, regno: regno.to_i)
     if (regno.length == 9) && (name.length > 3)
       if user.save
+        if user.user_questions.count == 0
+          questions = Question.all.ids.sample(10)
+          questions.each do |ques|
+            UserQuestion.create(question_id: ques, user_id: user.id)
+          end
+        end
         @current_user = user
         session[:current_user_id] = user.id
-        redirect_to(questions_path, notice: "Your'e signed in successfully!")
+        redirect_to(questions_path, notice: "You can ask question now!")
       else
         flash[:error] = user.errors.full_messages
         redirect_to root_path
@@ -30,6 +37,6 @@ class UsersController < ApplicationController
   def destroy
     session[:current_user_id] = nil
     @current_user = nil
-    redirect_to(root_path, notice: "Your'e logged Out successfully!")
+    redirect_to(root_path, notice: "Enter details of applicant to start recruitment!")
   end
 end
