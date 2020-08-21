@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :ensure_user_logged_in, only: ["new", "create"]
+
   def index
   end
 
@@ -7,10 +9,12 @@ class UsersController < ApplicationController
     name = params[:name]
     if (regno.length == 9) && (name.length > 3)
       user = User.create(name: name, regno: regno.to_i)
+      @current_user = user
+      puts(@current_user.id)
       session[:current_user_id] = user.id
       redirect_to(questions_path, notice: "Your'e signed in successfully!")
     else
-      redirect_to(new_user_path, alert: "Invalid Name or regno")
+      redirect_to(root_path, alert: "Invalid Name or regno")
     end
   end
 
