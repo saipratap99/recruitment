@@ -1,6 +1,8 @@
 class UserQuestionsController < ApplicationController
   def index
-    @questions = @current_user.user_questions
+    # @tech_questions = UserQuestion.getTechQuestions(@current_user)
+    # @non_tech_questions = UserQuestion.getNonTechQuestions(@current_user)
+    @questions = @current_user.user_questions.order(id: :asc)
   end
 
   def save_score

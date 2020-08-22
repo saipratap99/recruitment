@@ -1,6 +1,11 @@
 <h1 class="main-head primary-text text-center font-weight-bold text-primary">Questions</h1>
 <div id="allq">
   <% @questions.each_with_index do |ques,index| %>
+    <% if index == 0 %>
+      <p class="tech primary-text text-left font-weight-bold text-primary"> Technical Questions</p>
+    <% elsif index == 6 %>
+      <p class="tech primary-text text-left font-weight-bold text-primary"> Non-Technical Questions</p>
+    <% end %>
     <div class="question" id=<%= "q-#{ques.id}" %>>
       <div class="ques">
         <p><%= "Q#{index + 1}. " + ques.question.question %></p>

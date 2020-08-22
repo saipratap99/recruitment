@@ -50,6 +50,12 @@
   div.score:last-child {
     border-right: 0;
   }
+  p.tech {
+    width: 90%;
+    padding: 8px;
+    font-size: 14px;
+    margin: 5px auto;
+  }
 }
 @media screen and (max-width: 359px) {
   .ques p {
@@ -66,5 +72,11 @@
   }
   div.score:last-child {
     border-right: 0;
+  }
+  p.tech {
+    width: 90%;
+    padding: 8px;
+    font-size: 14px;
+    margin: 5px auto;
   }
 }

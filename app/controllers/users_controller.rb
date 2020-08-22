@@ -14,10 +14,12 @@ class UsersController < ApplicationController
     if (regno.length == 9) && (name.length > 3)
       if user.save
         if user.user_questions.count == 0
-          questions = Question.all.ids.sample(10)
-          questions.each do |ques|
-            UserQuestion.create(question_id: ques, user_id: user.id)
-          end
+          user.generateTechQues
+          user.generateNonTechQues
+        elsif user.user_questions.count == 6
+          user.generateNonTechQues
+        elsif user.user_questions.count == 4
+          user.generateTechQues
         end
         @current_user = user
         session[:current_user_id] = user.id
