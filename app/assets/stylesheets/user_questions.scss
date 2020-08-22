@@ -26,14 +26,19 @@ button {
   margin-top: 5px;
 }
 .ques {
-  width: 80%;
+  width: 100%;
   text-align: left;
   font-size: 21px;
+}
+#ques {
+  font-weight: bold;
+  color: darkslateblue;
 }
 .ans {
   margin-top: 5px;
   padding-top: 5px;
   font-size: 16px;
+  margin-bottom: 8px;
 }
 .score {
   display: flex;
