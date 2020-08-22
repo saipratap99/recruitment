@@ -16,4 +16,19 @@ class UserQuestionsController < ApplicationController
       format.js
     end
   end
+
+  def calculate_score
+    total = 0
+    score = params[:marks].to_i
+    @ques = @current_user.user_questions.order(id: :asc).last
+    @ques.scored = score.to_i
+    @ques.save
+    @current_user.user_questions.each { |q| total += q.scored }
+    @current_user.marks = total
+    @current_user.save
+    respond_to do |format|
+      format.html { redirect_to("/user_questions/index", notice: "Response submited!") }
+      format.js
+    end
+  end
 end

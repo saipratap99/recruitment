@@ -5,17 +5,26 @@
       <p class="tech primary-text text-left font-weight-bold text-primary"> Technical Questions</p>
     <% elsif index == 6 %>
       <p class="tech primary-text text-left font-weight-bold text-primary"> Non-Technical Questions</p>
+    <% elsif index == 10 %>
+      <p class="tech primary-text text-left font-weight-bold text-primary"> Interaction </p>
     <% end %>
     <div class="question" id=<%= "q-#{ques.id}" %>>
       <div class="ques">
         <p><%= "Q#{index + 1}. " + ques.question.question %></p>
         <p class="ans">
-          <%# Asked by Pratap on <span id="q_time">16 th July 2020</span> %>
+          <%= "ANS: " + ques.question.ans %>
         </p>
       </div>
       <div class="score">
-        <% @questions.each_with_index do |q,index| %>
-          <%= button_to "#{index+1}", save_score_path(ques.id,score: (index+1)), method: :post,class:"score-btn s-#{ques.id}-#{index+1}", remote: true %>
+        <% if index != 10 %>
+          <% for index in 1..10 %>
+            <%= button_to "#{index}", save_score_path(ques.id,score: (index)), method: :post,class:"score-btn s-#{ques.id}-#{index}", remote: true %>
+          <% end %>
+        <% else %>
+          <%= form_with(url: calculate_score_path , remote: true) do |form|%>
+            <%= form.number_field :marks, in: 0..50, step: 0.5 , placeholder:"MAX 50(marks)" %>
+            <%= form.submit "Submit" %>
+          <% end %>
         <% end %>
       </div>
     </div>

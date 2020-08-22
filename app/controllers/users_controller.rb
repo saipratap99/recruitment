@@ -13,13 +13,15 @@ class UsersController < ApplicationController
       User.new(name: name, regno: regno.to_i)
     if (regno.length == 9) && (name.length > 3)
       if user.save
+        ques = Question.where(ques_type: "interaction").first
         if user.user_questions.count == 0
           user.generateTechQues
           user.generateNonTechQues
-        elsif user.user_questions.count == 6
-          user.generateNonTechQues
-        elsif user.user_questions.count == 4
-          user.generateTechQues
+          user.user_questions.create(question_id: ques.id)
+          # elsif user.user_questions.count == 6
+          #   user.generateNonTechQues
+          # elsif user.user_questions.count == 4
+          #   user.generateTechQues
         end
         @current_user = user
         session[:current_user_id] = user.id

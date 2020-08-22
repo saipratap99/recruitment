@@ -1,0 +1,3 @@
+$("<%= "#q-#{@ques.id}" %>").css('opacity','0.6');
+$(".all-messages").html("<%= j (render partial: 'users/msg',
+                                       locals: {notice: "Response submited , total marks is #{@current_user.marks}" }) %>").hide().fadeIn(800);
