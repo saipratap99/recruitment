@@ -23,7 +23,7 @@
         <% else %>
           <%= form_with(url: calculate_score_path , remote: true) do |form|%>
             <%= form.number_field :marks, in: 0..50, step: 0.5 , placeholder:"MAX 50(marks)" %>
-            <%= form.submit "Submit" %>
+            <%= form.submit "Submit", class: "btn btn-secondary" %>
           <% end %>
         <% end %>
       </div>

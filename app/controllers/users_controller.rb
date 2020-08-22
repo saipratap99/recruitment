@@ -43,4 +43,15 @@ class UsersController < ApplicationController
     @current_user = nil
     redirect_to(root_path, notice: "Enter details of applicant to start recruitment!")
   end
+
+  def question
+  end
+
+  def add
+    question = params[:question]
+    ans = params[:ans]
+    ques_type = params[:ques_type]
+    Question.create(question: question, ans: ans, ques_type: ques_type)
+    redirect_to(question_path, notice: "Question added!")
+  end
 end
