@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :ensure_user_logged_in, only: ["new", "create"]
+  skip_before_action :ensure_user_logged_in, only: ["new", "create", "performance"]
 
   def index
   end

@@ -27,7 +27,7 @@
     </head>
     <body>
       <nav class="navbar navbar-dark bg-dark navbar-expand-md">
-        <a id="titlename" href="#" class="navbar-brand">ELECTRA Recruitment</a>
+        <a id="titlename" href="/" class="navbar-brand">ELECTRA Recruitment</a>
         <button
         class="navbar-toggler"
         data-toggle="collapse"
@@ -37,9 +37,12 @@
         </button>
         <div class="collapse navbar-collapse" id="myNav">
           <ul class="navbar-nav ml-auto">
-            <% if @current_user %>
-              <li class="nav-item dropdown">
-                <a
+            <li class="nav-item dropdown">
+              <a href="/users/performance">Performance</a>
+              <li>
+                <% if @current_user %>
+                  <li class="nav-item dropdown">
+                    <a
               class="nav-link dropdown-toggle"
               href="#"
               id="navbarDropdown"
@@ -48,20 +51,20 @@
               aria-haspopup="true"
               aria-expanded="false"
               >
-                  <%= @current_user.name %>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <p>
-                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                    <%= link_to "Exit", user_path(id: @current_user.id), method: :delete %>
-                  </p>
-                </div>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      </nav>
-      <%= render partial: "users/msg" %>
-      <%= yield %>
-    </body>
-  </html>
+                      <%= @current_user.name %>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <p>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <%= link_to "Exit", user_path(id: @current_user.id), method: :delete %>
+                      </p>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          </nav>
+          <%= render partial: "users/msg" %>
+          <%= yield %>
+        </body>
+      </html>
