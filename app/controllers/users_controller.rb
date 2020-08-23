@@ -56,6 +56,7 @@ class UsersController < ApplicationController
   end
 
   def performance
+    User.user_performances
     @users = User.all
   end
 end
