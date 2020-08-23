@@ -54,4 +54,8 @@ class UsersController < ApplicationController
     Question.create(question: question, ans: ans, ques_type: ques_type)
     redirect_to(question_path, notice: "Question added!")
   end
+
+  def performance
+    @users = User.all
+  end
 end

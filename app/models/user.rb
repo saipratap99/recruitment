@@ -16,4 +16,19 @@ class User < ApplicationRecord
       UserQuestion.create(question_id: ques, user_id: id)
     end
   end
+
+  def self.user_performances
+    all.each do |user|
+      tech, non_tech, interaction = 0, 0, 0
+      user.user_questions.each do |ques|
+        tech += ques.scored if ques.question.ques_type == "tech"
+        non_tech += ques.scored if ques.question.ques_type == "non-tech"
+        interaction += ques.scored if ques.question.ques_type == "interaction"
+      end
+      user.tech_marks = tech
+      user.non_tech_marks = non_tech
+      user.interaction_marks = interaction
+      user.save
+    end
+  end
 end
